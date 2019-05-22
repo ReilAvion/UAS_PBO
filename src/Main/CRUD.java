@@ -16,15 +16,15 @@ public class CRUD extends Connector{
         super();
     }
     
-    public void pemasukan(int pemasukan, String keterangan, String tanggal){
+    public void pemasukan(int pemasukan,int saldo, String keterangan, String tanggal){
         insertPemasukan(pemasukan);
-        insertDetailSaldo(keterangan, tanggal);
+        insertDetailSaldo(saldo, keterangan, tanggal);
         insertPengeluaran(0);
     }
     
-    public void pengeluaran(int pengeluaran, String keterangan, String tanggal){
+    public void pengeluaran(int pengeluaran,int saldo, String keterangan, String tanggal){
         insertPengeluaran(pengeluaran);
-        insertDetailSaldo(keterangan, tanggal);
+        insertDetailSaldo(saldo, keterangan, tanggal);
         insertPemasukan(0);
     }
     
@@ -38,9 +38,9 @@ public class CRUD extends Connector{
         }
     }
     
-    private void insertDetailSaldo(String keterangan, String tanggal){
+    private void insertDetailSaldo(int saldo, String keterangan, String tanggal){
         query = "INSERT INTO `saldo` (`saldo`,`keterangan`, `tanggal`) "
-                + "VALUES (0, '" + keterangan + "', '" + tanggal + "')";
+                + "VALUES ('" + saldo + "', '" + keterangan + "', '" + tanggal + "')";
         System.out.println(query);
         try{
             st.execute(query);
@@ -109,7 +109,21 @@ public class CRUD extends Connector{
         }catch(SQLException e){
             e.printStackTrace();
         }
-    return dataDetailSaldo;
+        return dataDetailSaldo;
+    }
+    
+    public int getSaldo(){
+        int saldo = 0;
+        query = "SELECT `saldo` FROM `saldo`";
+        System.out.println(query);
+        try{
+            rs = st.executeQuery(query);
+            rs.last();
+            saldo = Integer.parseInt(rs.getString(1));
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return saldo;
     }
 }    
 

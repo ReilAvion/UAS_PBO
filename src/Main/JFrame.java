@@ -19,17 +19,13 @@ public class JFrame extends javax.swing.JFrame {
 
     public CRUD db = new CRUD();
     private int saldo;
-    public ArrayList no = new ArrayList();
-    public ArrayList masuk = new ArrayList();
-    public ArrayList luar = new ArrayList();
-    public ArrayList ket = new ArrayList();
-    public ArrayList sal = new ArrayList();
-    public ArrayList tanggal = new ArrayList();
     
     public JFrame() {
         initComponents();
         Main.setVisible(true);
         Input.setVisible(false);
+        this.saldo = db.getSaldo();
+        disableButton();
     }
     
     private void updateTableData(){
@@ -52,6 +48,23 @@ public class JFrame extends javax.swing.JFrame {
             // Tanggal
             tabel.setValueAt(detailSaldo.get(i).getTanggal(), i, 5);
         }
+    }
+    
+    private void enableButton(){
+        btnKeluar.setEnabled(true);
+        btnMasuk.setEnabled(true);
+    }
+    private void disableButton(){
+        btnKeluar.setEnabled(false);
+        btnMasuk.setEnabled(false);
+    }
+    
+    private boolean isFormFilled(){
+        if (txtUang.getText().equals("") || 
+            txtKeterangan.getText().equals("") || 
+            date.getDate() == null)
+            return false;
+        return true;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -266,23 +279,28 @@ public class JFrame extends javax.swing.JFrame {
         jLabel3.setText("Keterangan : ");
 
         txtUang.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtUang.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtUangFocusGained(evt);
+        txtUang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUangMouseClicked(evt);
             }
         });
-        txtUang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUangActionPerformed(evt);
+        txtUang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUangKeyTyped(evt);
             }
         });
 
         txtKeterangan.setColumns(20);
         txtKeterangan.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtKeterangan.setRows(5);
-        txtKeterangan.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtKeteranganFocusGained(evt);
+        txtKeterangan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtKeteranganMouseClicked(evt);
+            }
+        });
+        txtKeterangan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtKeteranganKeyTyped(evt);
             }
         });
         jScrollPane2.setViewportView(txtKeterangan);
@@ -290,55 +308,59 @@ public class JFrame extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setText("Tanggal : ");
 
+        date.setFocusable(false);
+        date.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                datePropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout InputLayout = new javax.swing.GroupLayout(Input);
         Input.setLayout(InputLayout);
         InputLayout.setHorizontalGroup(
             InputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InputLayout.createSequentialGroup()
-                .addGroup(InputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(265, Short.MAX_VALUE)
+                .addComponent(btnMasuk)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnKeluar)
+                .addGap(42, 42, 42))
+            .addGroup(InputLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(InputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(InputLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMasuk)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnKeluar)
-                        .addGap(32, 32, 32))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InputLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(InputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(InputLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(InputLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))
-                            .addGroup(InputLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtUang)))))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(InputLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
+                    .addGroup(InputLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUang)))
                 .addContainerGap())
         );
         InputLayout.setVerticalGroup(
             InputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InputLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addGroup(InputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
                     .addGroup(InputLayout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(InputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtUang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(InputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                        .addComponent(jLabel4))
-                    .addGroup(InputLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(64, 64, 64)
+                .addGap(27, 27, 27)
+                .addGroup(InputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtUang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(InputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(InputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMasuk)
                     .addComponent(btnKeluar))
@@ -379,34 +401,51 @@ public class JFrame extends javax.swing.JFrame {
         Input.setVisible(true);
     }//GEN-LAST:event_btnAddMouseClicked
 
-    private void txtUangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUangActionPerformed
-
-    private void txtUangFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUangFocusGained
-        txtUang.setText("");
-    }//GEN-LAST:event_txtUangFocusGained
-
-    private void txtKeteranganFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtKeteranganFocusGained
-        txtKeterangan.setText("");
-    }//GEN-LAST:event_txtKeteranganFocusGained
-
     private void btnMasukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasukMouseClicked
-        
+        if(!btnMasuk.isEnabled()) return;
         Main.setVisible(true);
         Input.setVisible(false);
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         int pemasukan = Integer.parseInt(txtUang.getText());
         String keterangan = txtKeterangan.getText();
         String tanggal = sdf.format(date.getDate());
-        db.pemasukan(pemasukan, keterangan, tanggal);
+        saldo += Integer.parseInt(txtUang.getText());
+        db.pemasukan(pemasukan,saldo, keterangan, tanggal);
         updateTableData();
     }//GEN-LAST:event_btnMasukMouseClicked
-
+    
     private void btnKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKeluarMouseClicked
+        if(!btnKeluar.isEnabled()) return;
         Main.setVisible(true);
         Input.setVisible(false);
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        int pengeluaran = Integer.parseInt(txtUang.getText());
+        String keterangan = txtKeterangan.getText();
+        String tanggal = sdf.format(date.getDate());
+        saldo -= Integer.parseInt(txtUang.getText());
+        db.pengeluaran(pengeluaran,saldo, keterangan, tanggal);
+        updateTableData();
     }//GEN-LAST:event_btnKeluarMouseClicked
+
+    private void txtUangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUangKeyTyped
+        if (isFormFilled()) enableButton();
+    }//GEN-LAST:event_txtUangKeyTyped
+
+    private void txtKeteranganKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKeteranganKeyTyped
+        if (isFormFilled()) enableButton();
+    }//GEN-LAST:event_txtKeteranganKeyTyped
+
+    private void datePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_datePropertyChange
+        if (isFormFilled()) enableButton();
+    }//GEN-LAST:event_datePropertyChange
+
+    private void txtUangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUangMouseClicked
+        txtUang.setText("");
+    }//GEN-LAST:event_txtUangMouseClicked
+
+    private void txtKeteranganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtKeteranganMouseClicked
+        txtKeterangan.setText("");
+    }//GEN-LAST:event_txtKeteranganMouseClicked
 
     /**
      * @param args the command line arguments
