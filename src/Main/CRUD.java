@@ -50,10 +50,10 @@ public class CRUD extends Connector{
         ArrayList<Integer> dataPemasukan = new ArrayList<>();
         query = "SELECT * FROM `pemasukan`";
         try{
-            st.execute(query);
+            rs = st.executeQuery(query);
             while(rs.next()){
-                //Mendapatkan nilai pemasukan dari DB
-                Integer.parseInt(rs.getString(2));
+                //Mendapatkan nilai pemasukan dari DB;
+                dataPemasukan.add(Integer.parseInt(rs.getString(2)));
             }
         }catch(SQLException e){
             e.printStackTrace();
@@ -65,10 +65,10 @@ public class CRUD extends Connector{
         ArrayList<Integer> dataPengeluaran = new ArrayList<>();
         query = "SELECT * FROM `pengeluaran`";
         try{
-            st.execute(query);
+            rs = st.executeQuery(query);
             while(rs.next()){
-                //Mendapatkan nilai pemasukan dari DB
-                Integer.parseInt(rs.getString(2));
+                //Mendapatkan nilai pemasukan dari DB;
+                dataPengeluaran.add(Integer.parseInt(rs.getString(2)));
             }
         }catch(SQLException e){
             e.printStackTrace();
@@ -82,7 +82,7 @@ public class CRUD extends Connector{
         query = "SELECT * FROM `saldo`";
         System.out.println(query);
         try{
-            st.execute(query);
+            rs = st.executeQuery(query);
             while(rs.next()){ 
                 dataDetailSaldo.add(new Hitung(
                         //Mendapatkan saldo

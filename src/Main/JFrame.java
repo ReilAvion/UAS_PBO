@@ -35,20 +35,25 @@ public class JFrame extends javax.swing.JFrame {
         Input.setVisible(false);
     }
     
-    private void updateStatusTable(ArrayList<Pengeluaran> pengeluaran){
-        for(int i = 0 ; i < pengeluaran.size() ; i++){
-            // Nomor Baris
-            tabel.setValueAt(i+1, i, 0);
+    private void updateTableData(){
+        ArrayList<Integer> pemasukan = db.getPemasukan();
+        //ArrayList<Integer> pengeluaran = db.getPengeluaran();
+        ArrayList<Hitung> detailSaldo = db.getDetailSaldo();
+        int dataTotal = pemasukan.size();
+        for (int i = 0 ; i < dataTotal ; i++){
+            // Nomor
+            int no = i + 1;
+            tabel.setValueAt(no, i, 0);
             // Pemasukan
-            tabel.setValueAt(pengeluaran.get(1).getMasuk(), i, 1);
+            tabel.setValueAt(pemasukan.get(i), i, 1);
             // Pengeluaran
-            tabel.setValueAt(pengeluaran.get(1).getPrice(), i, 2);
-            //Saldo
-            tabel.setValueAt(pengeluaran.get(1).getSaldo(), i, 3);
-            //Keterangan
-            tabel.setValueAt(pengeluaran.get(2).getKeterangan(), i, 4);
-            //Tanggal
-            tabel.setValueAt(pengeluaran.get(3).getTanggal(), i, 5);
+            //tabel.setValueAt(pengeluaran.get(i), i, 2);
+            // Saldo
+            tabel.setValueAt(detailSaldo.get(i).getSaldo(), i, 3);
+            // Keterangan
+            tabel.setValueAt(detailSaldo.get(i).getKeterangan(), i, 4);
+            // Tanggal
+            tabel.setValueAt(detailSaldo.get(i).getTanggal(), i, 5);
         }
     }
     /**
@@ -80,25 +85,22 @@ public class JFrame extends javax.swing.JFrame {
 
         tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
                 "No", "Pemasukan", "Pengeluaran", "Saldo", "Keterangan", "Tanggal"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Long.class, java.lang.Long.class, java.lang.Long.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tabel);
@@ -301,9 +303,9 @@ public class JFrame extends javax.swing.JFrame {
         
         Main.setVisible(true);
         Input.setVisible(false);
-        DefaultTableModel dataModel = (DefaultTableModel) tabel.getModel();
-        
-        tabel.setAutoCreateColumnsFromModel(true);
+//        DefaultTableModel dataModel = (DefaultTableModel) tabel.getModel();
+//        
+//        tabel.setAutoCreateColumnsFromModel(true);
         
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         int pemasukan = Integer.parseInt(txtUang.getText());
@@ -311,8 +313,8 @@ public class JFrame extends javax.swing.JFrame {
         String tanggal = sdf.format(date.getDate());
         db.insertPemasukan(pemasukan);
         db.insertDetailSaldo(keterangan, tanggal);
-        tabel.setModel(dataModel);
-        updateStatusTable(tabel);
+        //tabel.setModel(dataModel);
+        updateTableData();
     }//GEN-LAST:event_btnMasukMouseClicked
 
     private void btnKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKeluarMouseClicked
