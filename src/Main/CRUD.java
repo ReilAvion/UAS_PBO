@@ -16,7 +16,19 @@ public class CRUD extends Connector{
         super();
     }
     
-    public void insertPemasukan(int pemasukan){
+    public void pemasukan(int pemasukan, String keterangan, String tanggal){
+        insertPemasukan(pemasukan);
+        insertDetailSaldo(keterangan, tanggal);
+        insertPengeluaran(0);
+    }
+    
+    public void pengeluaran(int pengeluaran, String keterangan, String tanggal){
+        insertPengeluaran(pengeluaran);
+        insertDetailSaldo(keterangan, tanggal);
+        insertPemasukan(0);
+    }
+    
+    private void insertPemasukan(int pemasukan){
         query = "INSERT INTO `pemasukan` (`id_pemasukan`, `pemasukan`) "
                 + "VALUES (NULL, '" + pemasukan + "')";
         try{
@@ -25,9 +37,11 @@ public class CRUD extends Connector{
             e.printStackTrace();
         }
     }
-    public void insertPengeluaran(int pengeluaran){
-        query = "INSERT INTO `pengeluaran` (`id_pengeluaran`, `pengeluaran`) "
-                + "VALUES (NULL, '" + pengeluaran + "')";
+    
+    private void insertDetailSaldo(String keterangan, String tanggal){
+        query = "INSERT INTO `saldo` (`saldo`,`keterangan`, `tanggal`) "
+                + "VALUES (0, '" + keterangan + "', '" + tanggal + "')";
+        System.out.println(query);
         try{
             st.execute(query);
         }catch(SQLException e){
@@ -35,10 +49,9 @@ public class CRUD extends Connector{
         }
     }
     
-    public void insertDetailSaldo(String keterangan, String tanggal){
-        query = "INSERT INTO `saldo` (`saldo`,`keterangan`, `tanggal`) "
-                + "VALUES (0, '" + keterangan + "', '" + tanggal + "')";
-        System.out.println(query);
+    private void insertPengeluaran(int pengeluaran){
+        query = "INSERT INTO `pengeluaran` (`id_pengeluaran`, `pengeluaran`) "
+                + "VALUES (NULL, '" + pengeluaran + "')";
         try{
             st.execute(query);
         }catch(SQLException e){

@@ -14,14 +14,11 @@ package Main;
 
 import java.util.*;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 public class JFrame extends javax.swing.JFrame {
 
     public CRUD db = new CRUD();
-    private long uangMasuk;
-    private long saldo;
-    private int nomor;
+    private int saldo;
     public ArrayList no = new ArrayList();
     public ArrayList masuk = new ArrayList();
     public ArrayList luar = new ArrayList();
@@ -37,7 +34,7 @@ public class JFrame extends javax.swing.JFrame {
     
     private void updateTableData(){
         ArrayList<Integer> pemasukan = db.getPemasukan();
-        //ArrayList<Integer> pengeluaran = db.getPengeluaran();
+        ArrayList<Integer> pengeluaran = db.getPengeluaran();
         ArrayList<Hitung> detailSaldo = db.getDetailSaldo();
         int dataTotal = pemasukan.size();
         for (int i = 0 ; i < dataTotal ; i++){
@@ -47,7 +44,7 @@ public class JFrame extends javax.swing.JFrame {
             // Pemasukan
             tabel.setValueAt(pemasukan.get(i), i, 1);
             // Pengeluaran
-            //tabel.setValueAt(pengeluaran.get(i), i, 2);
+            tabel.setValueAt(pengeluaran.get(i), i, 2);
             // Saldo
             tabel.setValueAt(detailSaldo.get(i).getSaldo(), i, 3);
             // Keterangan
@@ -85,6 +82,101 @@ public class JFrame extends javax.swing.JFrame {
 
         tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -303,17 +395,11 @@ public class JFrame extends javax.swing.JFrame {
         
         Main.setVisible(true);
         Input.setVisible(false);
-//        DefaultTableModel dataModel = (DefaultTableModel) tabel.getModel();
-//        
-//        tabel.setAutoCreateColumnsFromModel(true);
-        
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         int pemasukan = Integer.parseInt(txtUang.getText());
         String keterangan = txtKeterangan.getText();
         String tanggal = sdf.format(date.getDate());
-        db.insertPemasukan(pemasukan);
-        db.insertDetailSaldo(keterangan, tanggal);
-        //tabel.setModel(dataModel);
+        db.pemasukan(pemasukan, keterangan, tanggal);
         updateTableData();
     }//GEN-LAST:event_btnMasukMouseClicked
 
