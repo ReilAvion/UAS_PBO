@@ -402,7 +402,7 @@ public class JFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnMasukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasukMouseClicked
-        if(!btnMasuk.isEnabled()) return;
+        if(!btnMasuk.isEnabled() || !isFormFilled()) return;
         Main.setVisible(true);
         Input.setVisible(false);
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
@@ -415,7 +415,7 @@ public class JFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMasukMouseClicked
     
     private void btnKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKeluarMouseClicked
-        if(!btnKeluar.isEnabled()) return;
+        if(!btnKeluar.isEnabled() || !isFormFilled()) return;
         Main.setVisible(true);
         Input.setVisible(false);
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
