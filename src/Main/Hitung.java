@@ -22,8 +22,14 @@ public class Hitung {
     }
     public Hitung(int saldo){
         this.saldo = saldo;
+        this.keterangan = "N/A";
+        this.tanggal = "N/A";
     }
-    
+    public Hitung(int saldo, String keterangan, String tanggal){
+        this.saldo = saldo;
+        this.keterangan = keterangan;
+        this.tanggal = tanggal;
+    }
     public void setSaldo(int saldo) {
         this.saldo = saldo;
     }

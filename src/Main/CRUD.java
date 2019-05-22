@@ -35,7 +35,7 @@ public class CRUD extends Connector{
         }
     }
     
-    public void insertKeteranganTanggal(String keterangan, String tanggal){
+    public void insertDetailSaldo(String keterangan, String tanggal){
         query = "INSERT INTO `saldo` (`saldo`,`keterangan`, `tanggal`) "
                 + "VALUES (0, '" + keterangan + "', '" + tanggal + "')";
         System.out.println(query);
@@ -45,31 +45,61 @@ public class CRUD extends Connector{
             e.printStackTrace();
         }
     }
-    //mengambil data dalam DB
-    public ArrayList<String> getTableData(String tableName){
-        ArrayList<Pengeluaran> arr = new ArrayList<>();
-        query = "SELECT  `pemasukan`.`pemasukan`, `pengeluaran`.`pengeluaran`, `saldo`.`saldo`, `saldo`.`keterangan`, `saldo`.`tanggal`\n" +
-                "FROM `saldo`\n" + ", `pemasukan`\n" + ", `pengeluaran`;" + tableName;
-        System.out.println(query);
+    
+    public ArrayList<Integer> getPemasukan(){
+        ArrayList<Integer> dataPemasukan = new ArrayList<>();
+        query = "SELECT * FROM `pemasukan`";
         try{
             st.execute(query);
             while(rs.next()){
-                
-                        //Mendapatkan nilai pemasukan dari DB
-                        Integer.parseInt(rs.getString(2));
-                        //Mendapatkan nilai pengeluaran dari DB
-                        Integer.parseInt(rs.getString(3));
-                        //Mendapatkan nilai saldo dari DB
-                        Integer.parseInt(rs.getString(4));
-                        //Mendapatkan keterangan dari DB
-                        rs.getString(5);
-                        //Mendapatkan tanggal dari DB
-                        rs.getString(6);
+                //Mendapatkan nilai pemasukan dari DB
+                Integer.parseInt(rs.getString(2));
             }
         }catch(SQLException e){
             e.printStackTrace();
+        }
+        return dataPemasukan;
     }
     
+    public ArrayList<Integer> getPengeluaran(){
+        ArrayList<Integer> dataPengeluaran = new ArrayList<>();
+        query = "SELECT * FROM `pengeluaran`";
+        try{
+            st.execute(query);
+            while(rs.next()){
+                //Mendapatkan nilai pemasukan dari DB
+                Integer.parseInt(rs.getString(2));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return dataPengeluaran;
+    }
+    
+    //mengambil data dalam DB
+    public ArrayList<Hitung> getDetailSaldo(){
+        ArrayList<Hitung> dataDetailSaldo = new ArrayList<>();
+        query = "SELECT * FROM `saldo`";
+        System.out.println(query);
+        try{
+            st.execute(query);
+            while(rs.next()){ 
+                dataDetailSaldo.add(new Hitung(
+                        //Mendapatkan saldo
+                        Integer.parseInt(rs.getString(2)),
+                        //Mendapatkan keterangan
+                        rs.getString(3),
+                        //Mendapatkan tanggal
+                        rs.getString(4)
+                ));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    return dataDetailSaldo;
+    }
+}    
 
     
+
    

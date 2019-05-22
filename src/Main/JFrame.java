@@ -310,7 +310,7 @@ public class JFrame extends javax.swing.JFrame {
         String keterangan = txtKeterangan.getText();
         String tanggal = sdf.format(date.getDate());
         db.insertPemasukan(pemasukan);
-        db.insertKeteranganTanggal(keterangan, tanggal);
+        db.insertDetailSaldo(keterangan, tanggal);
         tabel.setModel(dataModel);
         updateStatusTable(tabel);
     }//GEN-LAST:event_btnMasukMouseClicked
