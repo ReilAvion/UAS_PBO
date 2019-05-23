@@ -81,6 +81,7 @@ public class Aplikasi extends javax.swing.JFrame {
         tabel = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         Input = new javax.swing.JPanel();
         btnMasuk = new javax.swing.JButton();
         btnKeluar = new javax.swing.JButton();
@@ -227,6 +228,19 @@ public class Aplikasi extends javax.swing.JFrame {
             }
         });
 
+        btnDelete.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
+        });
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout MainLayout = new javax.swing.GroupLayout(Main);
         Main.setLayout(MainLayout);
         MainLayout.setHorizontalGroup(
@@ -243,6 +257,8 @@ public class Aplikasi extends javax.swing.JFrame {
                         .addGap(236, 236, 236))
                     .addGroup(MainLayout.createSequentialGroup()
                         .addComponent(btnAdd)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         MainLayout.setVerticalGroup(
@@ -251,7 +267,9 @@ public class Aplikasi extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(13, 13, 13)
-                .addComponent(btnAdd)
+                .addGroup(MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
                 .addContainerGap())
@@ -448,6 +466,15 @@ public class Aplikasi extends javax.swing.JFrame {
         txtKeterangan.setText("");
     }//GEN-LAST:event_txtKeteranganMouseClicked
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        db.delete();
+        updateTableData();
+    }//GEN-LAST:event_btnDeleteMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -475,6 +502,8 @@ public class Aplikasi extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -488,6 +517,7 @@ public class Aplikasi extends javax.swing.JFrame {
     private javax.swing.JPanel Input;
     private javax.swing.JPanel Main;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnKeluar;
     private javax.swing.JButton btnMasuk;
     private com.toedter.calendar.JDateChooser date;
@@ -502,10 +532,7 @@ public class Aplikasi extends javax.swing.JFrame {
     private javax.swing.JTextField txtUang;
     // End of variables declaration//GEN-END:variables
 
-    private void updateStatusTable(JTable tabel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+  
  
 
     
