@@ -11,8 +11,8 @@ import java.util.*;
  *
  * @author Axioo
  */
-public class CRUD extends Connector{
-    public CRUD(){
+public class Database extends Connector{
+    public Database(){
         super();
     }
     
