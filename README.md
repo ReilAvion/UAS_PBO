@@ -2,8 +2,8 @@
 Percobaan penerapan konsep OOP dan implementasi JDBC antara Java dan Mysql
 
 ### PBO A - Kelompok 2:
- - Dimas Bayu Aji                     (11770500106)
- - Muhammad Akbar Hidayatullah        (1177050044)
+ - Dimas Bayu Aji                     (1177050xxx)
+ - Muhammad Akbar Hidayatullah        (1177050xxx)
  - Ryan Reliovani                     (1177050128)  
 
 ## Yang dibutuhkan :
