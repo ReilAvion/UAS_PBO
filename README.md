@@ -42,7 +42,12 @@ Percobaan penerapan konsep OOP dan implementasi JDBC antara Java dan Mysql
     - Pada tab Run (diantara **Refactor** dan **Debug**), click **Run Project**, dan pilih **Aplikasi.java** sebagai class utama
 
 ## Keterangan Menggunakan Aplikasi
--N/A   
+1.	Buka aplikasi, pada menu utama akan ditampilkan tabel data kosong.
+2.	Klik tombol  Add  untuk menambahkan data pada tabel.
+3.	Lalu isi semua form, mulai dari tanggal, nominal uang, dan keterangan, jika salah satu tidak terisi maka input data tidak bisa dilakukan.
+4.	Setelah form terisi semua, dibagian bawah kanan ada dua pilihan, yakni Pemasukan dan Pengeluaran, dua tombol ini yang akan menentukan apakah data masuk ke kolom pemasukan atau pengeluaran. Total akumulasi akan disimpan pada kolom saldo.
+5.	Selamat mencoba.
+
 
 ## TL;DR
 Clone project ini, buat database baru bernama **pengeluaran**, import file **pengeluaran.sql** yang terdapat pada folder /sql/, lalu run **Aplikasi.java** melalui netbeans
