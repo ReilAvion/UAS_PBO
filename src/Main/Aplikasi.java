@@ -30,6 +30,7 @@ public class Aplikasi extends javax.swing.JFrame {
     }
     
     private void updateTableData(){
+        
         ArrayList<Integer> pemasukan = db.getPemasukan();
         ArrayList<Integer> pengeluaran = db.getPengeluaran();
         ArrayList<Hitung> detailSaldo = db.getDetailSaldo();
@@ -49,7 +50,11 @@ public class Aplikasi extends javax.swing.JFrame {
             // Tanggal
             tabel.setValueAt(detailSaldo.get(i).getTanggal(), i, 5);
         }
-    }
+        
+        }
+    
+    
+    
     
     private void enableButton(){
         btnKeluar.setEnabled(true);
@@ -215,7 +220,7 @@ public class Aplikasi extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel1.setText("APLIKASI KEUANGAN");
 
-        btnAdd.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnAdd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -228,7 +233,7 @@ public class Aplikasi extends javax.swing.JFrame {
             }
         });
 
-        btnDelete.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnDelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -259,7 +264,7 @@ public class Aplikasi extends javax.swing.JFrame {
                         .addComponent(btnAdd)
                         .addGap(18, 18, 18)
                         .addComponent(btnDelete)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         MainLayout.setVerticalGroup(
             MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
