@@ -13,8 +13,6 @@ package Main;
 
 
 import java.util.*;
-import javax.swing.JTable;
-
 public class Aplikasi extends javax.swing.JFrame {
 
     public Database db = new Database();
@@ -51,10 +49,8 @@ public class Aplikasi extends javax.swing.JFrame {
             tabel.setValueAt(detailSaldo.get(i).getTanggal(), i, 5);
         }
         
-        }
-    
-    
-    
+    }
+   
     
     private void enableButton(){
         btnKeluar.setEnabled(true);
@@ -234,6 +230,7 @@ public class Aplikasi extends javax.swing.JFrame {
         });
 
         btnDelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 0, 0));
         btnDelete.setText("Delete");
         btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -262,9 +259,9 @@ public class Aplikasi extends javax.swing.JFrame {
                         .addGap(236, 236, 236))
                     .addGroup(MainLayout.createSequentialGroup()
                         .addComponent(btnAdd)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDelete)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         MainLayout.setVerticalGroup(
             MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,15 +469,16 @@ public class Aplikasi extends javax.swing.JFrame {
     }//GEN-LAST:event_txtKeteranganMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        db.delete();
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        db.delete();
         updateTableData();
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     /**
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
